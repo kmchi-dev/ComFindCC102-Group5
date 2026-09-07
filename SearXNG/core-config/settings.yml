@@ -11,7 +11,7 @@ search:
     - json
 
 server:
-  secret_key: "ComFind-SearXNG-8FK3mq9xL3vR7pN5"
+  secret_key: "ComFind-SearXNG-67f3mb8xx0vy7IN5"
   bind_address: "0.0.0.0"
   port: 8080
   base_url: false

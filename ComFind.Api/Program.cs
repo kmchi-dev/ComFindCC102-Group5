@@ -97,6 +97,15 @@ app.MapGet("/api/search", async (
         });
     }
 
+    var history = new SearchHistory
+    {
+        Query = q,
+        SearchedAt = DateTime.UtcNow
+    };
+
+    db.SearchHistories.Add(history);
+    await db.SaveChangesAsync();
+
     var results = await db.WebPages
         .Where(page =>
             page.Title.Contains(q) ||
@@ -148,6 +157,15 @@ app.MapGet("/api/search", async (
         query = q,
         results = searchResults
     });
+});
+
+app.MapGet("/api/search/history", async (ComFindDbContext db) =>
+{
+    var history = await db.SearchHistories
+        .OrderByDescending(search => search.SearchedAt)
+        .ToListAsync();
+
+    return Results.Ok(history);
 });
 
 app.MapDelete("/api/webpages/{id}", async (

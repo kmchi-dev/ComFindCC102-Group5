@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+```
+<title>ComFind - Hardware Search</title>
+
+<link rel="stylesheet" href="style.css">
+```
+
+</head>
+
+<body>
+
+```
+<header class="header">
+    <div class="logo">
+        <span class="logo-mark">C</span>
+        <span>ComFind</span>
+    </div>
+
+    <p>Computer Hardware Search Engine</p>
+</header>
+
+<main class="container">
+
+    <section class="search-section">
+        <h1>Find Hardware Information</h1>
+
+        <p class="description">
+            Search through our collection of computer hardware information.
+        </p>
+
+        <div class="search-box">
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search for CPU, GPU, RAM, SSD..."
+                autocomplete="off"
+            >
+
+            <button id="searchButton">
+                Search
+            </button>
+        </div>
+
+        <div id="status" class="status"></div>
+    </section>
+
+    <section class="results-section">
+        <h2>Search Results</h2>
+
+        <div id="results"></div>
+    </section>
+
+    <section class="history-section">
+        <h2>Recent Searches</h2>
+
+        <div id="history">
+            <p class="empty-message">No recent searches.</p>
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    <p>ComFind &copy; 2026</p>
+</footer>
+
+<script src="script.js"></script>
+```
+
+</body>
+</html>

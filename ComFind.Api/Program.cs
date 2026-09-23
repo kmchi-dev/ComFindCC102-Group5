@@ -13,11 +13,14 @@ builder.Services.AddHttpClient<CrawlerService>();
 
 var app = builder.Build();
 
-app.MapGet("/", () => Results.Ok(new
+app.UseDefaultFiles();
+app.UseStaticFiles();
+
+app.MapGet("/", async (HttpContext context) =>
 {
-    name = "ComFind API",
-    status = "Running"
-}));
+    await context.Response.SendFileAsync(
+        Path.Combine(app.Environment.WebRootPath!, "index.html"));
+});
 
 app.MapGet("/api/websites", async (ComFindDbContext db) =>
 {
@@ -106,10 +109,12 @@ app.MapGet("/api/search", async (
     db.SearchHistories.Add(history);
     await db.SaveChangesAsync();
 
-    var results = await db.WebPages
-        .Where(page =>
-            page.Title.Contains(q) ||
-            page.Content.Contains(q))
+    var searchQuery = q.ToLower();
+
+var results = await db.WebPages
+    .Where(page =>
+        page.Title.ToLower().Contains(searchQuery) ||
+        page.Content.ToLower().Contains(searchQuery))
         .Select(page => new
         {
             page.Id,
